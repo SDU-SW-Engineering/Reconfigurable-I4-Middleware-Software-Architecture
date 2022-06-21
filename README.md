@@ -1,1 +1,1 @@
-# Reconfigurable-I4-Middleware-Software-Architecture
+# A Reconfigurable Industry 4.0 Middleware Software Architecture
