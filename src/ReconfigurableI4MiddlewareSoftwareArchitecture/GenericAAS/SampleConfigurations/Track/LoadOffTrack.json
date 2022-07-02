@@ -1,0 +1,26 @@
+{
+  "communicationprotocol_parameters": {
+    "id": "Trak",
+    "type": "OPCUA",
+    "hostNotUSED": "localhost",
+    "portNOTUSED": "8888",
+    "host": "192.168.1.100",
+    "port": "4840"
+  },
+  "execution_flow": {
+    "ID": "<UUID>",
+    "capabilityId": "LoadOffTrack",
+    "steps": [
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOffTrack",
+          "message": "true"
+        }
+      }
+    ]
+  }
+}

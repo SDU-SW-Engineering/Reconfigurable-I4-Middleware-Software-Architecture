@@ -1,0 +1,113 @@
+{
+  "recipeName":  "drone",
+  "steps": [
+    {
+      "stepId": 1,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "getCarrier",
+        "parameters": {
+          "productId": 1012
+        },
+        "notifications": {
+          "dashboard": "step1Started",
+          "simulation": "GetCarrier"
+        }
+      },
+      "response": {
+        "parameters": {
+          "effimatReferenceId": null,
+          "carrierSlot": null,
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step1Executed",
+          "simulation": "CarrierAtOpening"
+        }
+      },
+      "saveReceivedParameters": [
+        "effimatReferenceId",
+        "carrierSlot"
+      ]
+    },
+    {
+      "stepId": 4,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "returnCarrier",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step4Started",
+          "simulation": "PutCarrierBack"
+        },
+        "insertReceivedParameters": ["effimatReferenceId"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step4Executed",
+          "simulation": "CarrierInStock"
+        }
+      }
+    },
+    {
+      "stepId": 16,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "getCarrier",
+        "parameters": {
+          "productId": 1012
+        },
+        "notifications": {
+          "dashboard": "step16Started",
+          "simulation": "GetCarrier"
+        }
+      },
+      "response": {
+        "parameters": {
+          "effimatReferenceId": null,
+          "carrierSlot": null,
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step16Executed",
+          "simulation": "CarrierAtOpening"
+        }
+      },
+      "saveReceivedParameters": [
+        "effimatReferenceId",
+        "carrierSlot"
+      ]
+    },
+    {
+      "stepId": 19,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "returnCarrier",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step19Started",
+          "simulation": "PutCarrierBack"
+        },
+        "insertReceivedParameters": ["effimatReferenceId"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step19Executed",
+          "simulation": "CarrierInStock"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Configurator": {
+      "commandName": "Project",
+      "environmentVariables": {
+      },
+      "jsWebView2Debugging": false
+    }
+  }
+}

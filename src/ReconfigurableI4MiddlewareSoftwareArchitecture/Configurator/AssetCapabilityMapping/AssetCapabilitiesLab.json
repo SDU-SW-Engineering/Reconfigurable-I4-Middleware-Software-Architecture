@@ -1,0 +1,78 @@
+[
+  {
+    "id": "UR1Left",
+    "serviceSetupInformation": {
+      "serviceId": "i4.sdu.dk/Assembly/UR1Left",
+      "bus": "SampleConfigurations/Bus/bus_config_docker_assembly.json",
+      "asset": [
+        "SampleConfigurations/UR/Cell1RotateLeft.json"
+      ]
+    },
+    "capabilities": [
+      "Cell1RotateLeft"
+    ]
+  },
+  {
+    "id": "UR1Right",
+    "serviceSetupInformation": {
+      "serviceId": "i4.sdu.dk/Assembly/UR1Right",
+      "bus": "SampleConfigurations/Bus/bus_config_docker_assembly.json",
+      "asset": [
+        "SampleConfigurations/UR/Cell1RotateRight.json"
+      ]
+    },
+    "capabilities": [
+      "Cell1RotateRight"
+    ]
+  },
+  {
+    "id": "UR2Right",
+    "serviceSetupInformation": {
+      "serviceId": "i4.sdu.dk/Assembly/UR2Right",
+
+      "bus": "SampleConfigurations/Bus/bus_config_docker_assembly.json",
+      "asset": [
+        "SampleConfigurations/UR/Cell2RotateRight.json"
+      ]
+    },
+    "capabilities": [
+      "Cell2RotateRight"
+    ]
+  },
+  {
+    "id": "UR2Left",
+    "serviceSetupInformation": {
+      "serviceId": "i4.sdu.dk/Assembly/UR2Left",
+
+      "bus": "SampleConfigurations/Bus/bus_config_docker_assembly.json",
+      "asset": [
+        "SampleConfigurations/UR/Cell2RotateLeft.json"
+      ]
+    },
+    "capabilities": [
+      "Cell2RotateLeft"
+    ]
+  },
+  {
+    "id": "TrakFull",
+    "serviceSetupInformation": {
+      "serviceId": "i4.sdu.dk/Transport/Track",
+      "bus": "SampleConfigurations/Bus/bus_config_docker_transport.json",
+      "asset": [
+        "SampleConfigurations/Track/MoveAssemblyPart.json",
+        "SampleConfigurations/Track/LoadOnTrack.json",
+        "SampleConfigurations/Track/TaskCompleteCell1.json",
+        "SampleConfigurations/Track/TaskCompleteCell2.json",
+        "SampleConfigurations/Track/LoadOffTrack.json",
+        "SampleConfigurations/Track/Cell1ToCell2.json"
+      ]
+    },
+    "capabilities": [
+      "MoveAssemblyPart",
+      "LoadOnTrack",
+      "TaskCompleteCell1",
+      "TaskCompleteCell2",
+      "LoadOffTrack"
+    ]
+  }
+]

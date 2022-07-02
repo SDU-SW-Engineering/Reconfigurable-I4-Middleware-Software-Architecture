@@ -1,0 +1,53 @@
+{
+  "recipeName":  "UR",
+  "steps": [
+    {
+      "stepId": 9,
+      "topic": "Assembly",
+      "command": {
+        "targetId": "i4.sdu.dk/Assembly/UR",
+        "operation": "start",
+        "parameters": {
+          "cellNumber": 1
+        },
+        "notifications": {
+          "dashboard": "step9Started",
+          "simulation": "StartCell1"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step9Executed",
+          "simulation": "EndCell1"
+        }
+      }
+    },
+    {
+      "stepId": 11,
+      "topic": "Assembly",
+      "command": {
+        "targetId": "i4.sdu.dk/Assembly/UR",
+        "operation": "start",
+        "parameters": {
+          "cellNumber":2
+        },
+        "notifications": {
+          "dashboard": "step11Started",
+          "simulation": "StartCell2"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step11Executed",
+          "simulation": "EndCell2"
+        }
+      }
+    }
+  ]
+}

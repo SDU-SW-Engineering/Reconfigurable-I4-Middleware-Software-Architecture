@@ -1,0 +1,42 @@
+{
+  "communicationprotocol_parameters": {
+    "id": "Trak",
+    "type": "OPCUA",
+    "hostNotUSED": "localhost",
+    "portNOTUSED": "8888",
+    "host": "192.168.1.100",
+    "port": "4840"
+  },
+  "execution_flow": {
+    "ID": "<UUID>",
+    "capabilityId": "TaskCompleteCell1",
+    "steps": [
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell1",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell2",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "recipeName": "reset",
+  "steps": [
+    {
+      "stepId": 1,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "Reset"
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 2,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "Reset"
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 3,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "Reset"
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    }
+  ]
+}

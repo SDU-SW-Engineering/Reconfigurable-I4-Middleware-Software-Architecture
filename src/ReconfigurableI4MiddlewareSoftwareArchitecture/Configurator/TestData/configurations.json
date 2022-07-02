@@ -1,0 +1,56 @@
+{
+    "id": 1,
+    "capabilities":["transport", "assembly", "assembly", "transport"],
+    "resources":[
+        {
+            "stepId": 1,
+            "topic": "Transport",
+            "command": [
+                {
+                "targetId": "i4.sdu.dk/Transport/ER",
+                "operation": "moveToStorage",
+                "parameters": []
+                }
+            ]            
+        },
+        {
+            "stepId": 2,
+            "topic": "Assembly",
+            "command":
+            [ 
+                {
+                    "targetId": "i4.sdu.dk/Assembly/UR",
+                    "operation": "start",
+                    "parameters":
+                    [ 
+                        {
+                            "datatype" : "int",
+                            "value": 1,
+                            "variableName": "cellNumber"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stepId": 2,
+            "topic": "Assembly",
+            "command":
+            [ 
+                {
+                    "targetId": "i4.sdu.dk/Assembly/UR",
+                    "operation": "start",
+                    "parameters":
+                    [ 
+                        {
+                            "datatype" : "int",
+                            "value": 2,
+                            "variableName": "cellNumber"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+
+}

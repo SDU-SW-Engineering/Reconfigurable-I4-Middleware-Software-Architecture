@@ -1,0 +1,40 @@
+{
+  "communicationprotocol_parameters": {
+    "id": "Trak",
+    "type": "OPCUA",
+    "port": "8888",
+    "host": "OPCUA_BROKER"
+  },
+  "execution_flow": {
+    "ID": "<UUID>",
+    "capabilityId": "MoveAssemblyPart",
+    "steps": [
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "writenumber",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:MoveAssemblyPart",
+          "message": "1"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOn",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      }
+    ]
+  }
+}

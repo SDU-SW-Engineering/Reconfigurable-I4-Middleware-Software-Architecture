@@ -1,0 +1,5 @@
+//Command to start production the production of two production of type: Cell1RightCell2Left
+{  "@id":"2f0d7927-84ec-4334-b4ad-29b1d657ae2a",  "@type":"operation",  "aasOriginId":"i4.sdu.dk/Middleware/Orchestrator",  "aasTargetId":"i4.sdu.dk/Middleware/Orchestrator",  "orderId":"123456789",  "operation":"fabricateDrone", "parameters":{"order":{"recipeName":"Cell1RightCell2Left", "amount":2}}  }
+//Command to start production the production of two production of type: Cell1LeftCell2Right
+{  "@id":"2f0d7927-84ec-4334-b4ad-29b1d657ae2a",  "@type":"operation",  "aasOriginId":"i4.sdu.dk/Middleware/Orchestrator",  "aasTargetId":"i4.sdu.dk/Middleware/Orchestrator",  "orderId":"123456789",  "operation":"fabricateDrone", "parameters":{"order":{"recipeName":"Cell1LeftCell2Right", "amount":2}}  }
+

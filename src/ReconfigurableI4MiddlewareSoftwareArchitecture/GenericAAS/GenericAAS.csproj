@@ -1,0 +1,147 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Version>1.1.10</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="I4ToolchainDotnetCore" Version="3.1.9" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+      <PackageReference Include="MQTTnet" Version="3.0.12" />
+      <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua" Version="1.4.368.53" />
+      <PackageReference Include="Serilog.Sinks.Confluent.Kafka" Version="1.10.0" />
+      <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="SampleConfigurations\Bus\bus_config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Bus\bus_config_docker.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Bus\bus_config_docker_assembly.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Bus\bus_config_docker_transport.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\Cell1ToCell2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\Cell1ToCell2Stub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\LoadOffTrack.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\LoadOffTrackStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\LoadOnTrack.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\LoadOnTrackStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\MoveAssemblyPart.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\MoveAssemblyPartStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\opcua1_config_docker.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\opcua_config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\opcua_config_docker.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\Reset.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\TaskCompleteCell1.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\TaskCompleteCell1Stub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\TaskCompleteCell2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\Track\TaskCompleteCell2Stub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell1RotateLeft.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell1RotateLeftStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell1RotateRight.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell1RotateRightStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell2RotateLeft.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell2RotateLeftStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell2RotateRight.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\Cell2RotateRightStub.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\mqtt_config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\mqtt_config_docker.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="SampleConfigurations\UR\right_config_docker.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.json" />
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.Development.json" />
+      <Content Include="appsettings.Development.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.Production.json" />
+      <Content Include="appsettings.Production.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="SampleConfigurations\bus_config.json" />
+      <None Remove="SampleConfigurations\mqtt_config.json" />
+      <None Remove="SampleConfigurations\mqtt_config_minimal.json" />
+      <None Remove="pkgconfig\rdkafka.pc" />
+      <None Remove="pkgconfig\rdkafka++.pc" />
+      <None Remove="pkgconfig\rdkafka++-static.pc" />
+      <None Remove="pkgconfig\rdkafka-static.pc" />
+      <None Remove="librdkafka.a" />
+      <None Remove="librdkafka.dylib" />
+      <None Remove="librdkafka++.a" />
+      <None Remove="librdkafka++.dylib" />
+      <None Remove="librdkafka++.1.dylib" />
+      <None Remove="librdkafka.1.dylib" />
+      <None Remove="AssetCommunication\OPCUA\Client.Config.xml" />
+      <Content Include="AssetCommunication\OPCUA\Client.Config.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="AssetCommunication\REST" />
+    </ItemGroup>
+
+</Project>

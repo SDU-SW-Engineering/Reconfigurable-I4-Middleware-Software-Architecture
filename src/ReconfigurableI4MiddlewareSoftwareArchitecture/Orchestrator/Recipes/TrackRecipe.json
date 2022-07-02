@@ -1,0 +1,127 @@
+{
+  "recipeName": "ACOPOStrak",
+  "steps": [
+    {
+      "stepId": 6,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "moveAssemblyPart",
+        "parameters": {
+
+        },
+        "notifications": {
+          "dashboard": "step6Started",
+          "simulation": "MoveAssemblyPart"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step6Executed",
+          "simulation": "WaitingLoadOn"
+        }
+      }
+    },
+    {
+      "stepId": 8,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "loadOnTrack",
+        "parameters": {
+
+        },
+        "notifications": {
+          "dashboard": "step8Started",
+          "simulation": "LoadOnTrack"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step8Executed",
+          "simulation": "WaitingCell1"
+        }
+      }
+    },
+
+    {
+      "stepId": 10,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "taskComplete",
+        "parameters": {
+          "cellNumber": 1
+        },
+        "notifications": {
+          "dashboard": "step10Started",
+          "simulation": "TaskCompleteCell1"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step10Executed",
+          "simulation": "WaitingCell2"
+        }
+      }
+    },
+
+    {
+      "stepId": 12,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "taskComplete",
+        "parameters": {
+          "cellNumber": 2
+        },
+        "notifications": {
+          "dashboard": "step12Started",
+          "simulation": "TaskCompleteCell2"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step12Executed",
+          "simulation": "WaitingLoadOff"
+        }
+      }
+    },
+
+    {
+      "stepId": 15,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "loadOffTrack",
+        "parameters": {
+
+        },
+        "notifications": {
+          "dashboard": "step15Started",
+          "simulation": "LoadOffTrack"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step15Executed"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "communicationprotocol_parameters": {
+    "id": "UR",
+    "type": "MQTT",
+    "host": "192.168.1.90",
+    "client_id": "sadfasdsd",
+    "port": "1883",
+    "requiredSubscriptions": [
+      "Cell2/status",
+      "Cell1/status"
+    ]
+    
+  },
+  "execution_flow": {
+    "ID": "<UUID>",
+    "capabilityId": "Cell2RotateRight",
+    "steps": [
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "MQTT",
+        "method": "Publish",
+        "parameters": {
+          "topic": "Cell2/rotate",
+          "message": "{\"direction\":\"right\", \"turns\": 1}"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "MQTT",
+        "method": "Subscribe",
+        "parameters": {
+          "topic": "Cell2/status"
+        },
+        "condition": {
+          "value": "{\"started\":1,\"finished\":0}",
+          "time": "100000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "MQTT",
+        "method": "Subscribe",
+        "parameters": {
+          "topic": "Cell2/status"
+        },
+        "condition": {
+          "value": "{\"started\":1,\"finished\":1}",
+          "time": "100000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "MQTT",
+        "method": "Publish",
+        "parameters": {
+          "topic": "Cell2/status",
+          "message": "{\"started\":0,\"finished\":0}"
+        }
+      }
+    ]
+  }
+}

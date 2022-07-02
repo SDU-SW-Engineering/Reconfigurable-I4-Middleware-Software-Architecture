@@ -1,0 +1,445 @@
+{
+  "communicationprotocol_parameters": {
+    "id": "Trak",
+    "type": "OPCUA",
+    "port": "8888",
+    "host": "OPCUA_BROKER"
+  },
+  "execution_flow": {
+    "ID": "<UUID>",
+    "capabilityId": "Cell1ToCell2",
+    "steps": [
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:Reset",
+          "message": "true"
+        }
+      },{
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:Reset",
+          "message": "true"
+        }
+      },{
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:Reset",
+          "message": "true"
+        }
+      },{
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:Reset",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "writenumber",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:MoveAssemblyPart",
+          "message": "1"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOn",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOnTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell1",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell1",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell2",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell2",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOff",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "EndOfFirstLoop---------",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOffTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "writenumber",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:MoveAssemblyPart",
+          "message": "1"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOn",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOnTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell1",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell1",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell2",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell2",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOff",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "EndOfFirstLoop---------",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOffTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "writenumber",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:MoveAssemblyPart",
+          "message": "1"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOn",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOnTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell1",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell1",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell2",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:TaskCompleteCell2",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOff",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "EndOfFirstLoop---------",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOffTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "writenumber",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:MoveAssemblyPart",
+          "message": "1"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingLoadOn",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "OPCUA",
+        "method": "WriteBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:LoadOnTrack",
+          "message": "true"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "OPCUA",
+        "method": "ReadBool",
+        "parameters": {
+          "node": "ns=6;s=::AsGlobalPV:WaitingCell1",
+          "response": "true"
+        },
+        "condition": {
+          "value": "true",
+          "time": "50000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      }
+    ]
+  }
+}

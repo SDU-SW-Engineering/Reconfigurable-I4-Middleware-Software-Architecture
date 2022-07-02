@@ -1,0 +1,55 @@
+// value in set pipeline to insert time stamp
+{{_ingest.timestamp}}
+
+// calculating difference between sent and received timestamp
+if(ctx.containsKey("receivedTime") && 
+        ctx.containsKey("Timestamp")) { 
+    ctx['receival_lag_millis'] = ChronoUnit.MILLIS.between(ZonedDateTime.parse(ctx['Timestamp']), ZonedDateTime.parse(ctx['receivedTime'])); 
+}
+
+// add this to the index under index management and "edit settings"
+"index.default_pipeline": "timestamp"
+
+// pipeline should look like the following
+[
+  {
+    "set": {
+      "field": "receivedTime",
+      "value": "{{_ingest.timestamp}}",
+      "override": false,
+      "description": "setReceivalTime"
+    }
+  },
+  {
+    "script": {
+      "source": "if(ctx.containsKey(\"receivedTime\") && \n        ctx.containsKey(\"Timestamp\")) { \n    ctx['receival_lag_millis'] = ChronoUnit.MILLIS.between(ZonedDateTime.parse(ctx['Timestamp']), ZonedDateTime.parse(ctx['receivedTime'])); \n}",
+      "description": "calculateDelay"
+    }
+  },
+  {
+    "json": {
+      "field": "Properties.executionHandlerStatus.keyword",
+      "if": "ctx.Properties?.executionHandlerStatus?.keyword != null",
+      "ignore_failure": true
+    }
+  }
+]
+
+// creating special topic for connector
+docker exec kafka1 ./bin/kafka-topics.sh --bootstrap-server kafka1:19092 --create --replication-factor 1 --partitions 1 --topic connect-offsets --config cleanup.policy=compact
+
+// setting up connector, send to localhost:8083/connectors
+{
+    "name": "logConnector2",
+    "config": {
+        "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+        "tasks.max": "1",
+        "topics": "logs",
+        "key.ignore": "true",
+        "schema.ignore": "true",
+        "connection.url": "http://elasticsearch:9200",
+        "type.name": "test-type",
+        "name": "elasticsearch-sink"
+    }
+}
+

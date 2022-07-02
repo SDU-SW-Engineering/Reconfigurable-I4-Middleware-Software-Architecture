@@ -1,0 +1,493 @@
+{
+  "recipeName":  "drone",
+  "steps": [
+    {
+      "stepId": 1,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "getCarrier",
+        "parameters": {
+          "productId": 1012
+        },
+        "notifications": {
+          "dashboard": "step1Started",
+          "simulation": "GetCarrier"
+        }
+      },
+      "response": {
+        "parameters": {
+          "effimatReferenceId": null,
+          "carrierSlot": null,
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step1Executed",
+          "simulation": "CarrierAtOpening"
+        }
+      },
+      "saveReceivedParameters": [
+        "effimatReferenceId",
+        "carrierSlot"
+      ]
+    },
+    {
+      "stepId": 2,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "moveToStorage",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step2Started",
+          "simulation": "MoveToWarehouse"
+        },
+        "insertReceivedParameters": ["carrierSlot"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step2Executed",
+          "simulation": "AtWarehouse"
+        }
+      }
+    },
+    {
+      "stepId": 3,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "pickItem",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step3Started",
+          "simulation": "PickUpAtWarehouse"
+        },
+        "insertReceivedParameters": ["carrierSlot"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step3Executed",
+          "simulation": "PartPickedAtWarehouse"
+        }
+      }
+    },
+    {
+      "stepId": 4,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "returnCarrier",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step4Started",
+          "simulation": "PutCarrierBack"
+        },
+        "insertReceivedParameters": ["effimatReferenceId"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step4Executed",
+          "simulation": "CarrierInStock"
+        }
+      }
+    },
+    {
+      "stepId": 5,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "moveToInlet",
+        "parameters": {},
+        "notifications": {
+          "dashboard": "step5Started",
+          "simulation": "MoveToB&Rinlet"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step5Executed",
+          "simulation": "AtB&RInlet"
+        }
+      }
+    },
+    {
+      "stepId": 6,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "moveAssemblyPart",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step6Started",
+          "simulation": "MoveAssemblyPart"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step6Executed",
+          "simulation": "WaitingLoadOn"
+        }
+      }
+    },
+    {
+      "stepId": 7,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "loadShuttle",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step7Started",
+          "simulation": "LoadShuttle"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step7Executed",
+          "simulation": "ShuttleLoaded"
+        }
+      }
+    },
+    {
+      "stepId": 8,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "loadOnTrack",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step8Started",
+          "simulation": "LoadOnTrack"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step8Executed",
+          "simulation": "WaitingCell1"
+        }
+      }
+    },
+    {
+      "stepId": 9,
+      "topic": "Assembly",
+      "command": {
+        "targetId": "i4.sdu.dk/Assembly/UR",
+        "operation": "start",
+        "parameters": {
+          "cellNumber": 1
+        },
+        "notifications": {
+          "dashboard": "step9Started",
+          "simulation": "StartCell1"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step9Executed",
+          "simulation": "EndCell1"
+        }
+      }
+    },
+    {
+      "stepId": 10,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "taskComplete",
+        "parameters": {
+          "cellNumber":1
+        },
+        "notifications": {
+          "dashboard": "step10Started",
+          "simulation": "TaskCompleteCell1"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step10Executed",
+          "simulation": "WaitingCell2"
+        }
+      }
+    },
+    {
+      "stepId": 11,
+      "topic": "Assembly",
+      "command": {
+        "targetId": "i4.sdu.dk/Assembly/UR",
+        "operation": "start",
+        "parameters": {
+          "cellNumber":2
+        },
+        "notifications": {
+          "dashboard": "step11Started",
+          "simulation": "StartCell2"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step11Executed",
+          "simulation": "EndCell2"
+        }
+      }
+    },
+    {
+      "stepId":12,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "taskComplete",
+        "parameters": {
+          "cellNumber":2
+        },
+        "notifications": {
+          "dashboard": "step12Started",
+          "simulation": "TaskCompleteCell2"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step12Executed",
+          "simulation": "WaitingLoadOff"
+        }
+      }
+    },
+    {
+      "stepId": 13,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "moveToOutlet",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step13Started",
+          "simulation": "MoveToB&ROutlet"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step13Executed",
+          "simulation": "AtB&ROutlet"
+        }
+      }
+    },
+    {
+      "stepId": 14,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "pickPartFromTrack",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step14Started",
+          "simulation": "UnloadShuttle"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step14Executed",
+          "simulation": "ShuttleUnloaded"
+        }
+      }
+    },
+    {
+      "stepId": 15,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "loadOffTrack",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step15Started",
+          "simulation": "LoadOffTrack"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step15Executed",
+        }
+      }
+    },
+    {
+      "stepId": 16,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "getCarrier",
+        "parameters": {
+          "productId": 1012
+        },
+        "notifications": {
+          "dashboard": "step16Started",
+          "simulation": "GetCarrier"
+        }
+      },
+      "response": {
+        "parameters": {
+          "effimatReferenceId": null,
+          "carrierSlot": null,
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step16Executed",
+          "simulation": "CarrierAtOpening"
+        }
+      },
+      "saveReceivedParameters": [
+        "effimatReferenceId",
+        "carrierSlot"
+      ]
+    },
+    {
+      "stepId": 17,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "moveToStorage",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step17Started",
+          "simulation": "MoveToWarehouse"
+        }
+        ,
+        "insertReceivedParameters": ["carrierSlot"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step17Executed",
+          "simulation": "AtWarehouse"
+        }
+      }
+    },
+    {
+      "stepId": 18,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "putItem",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step18Started",
+          "simulation": "PlacePartAtWarehouse"
+        },
+        "insertReceivedParameters": ["carrierSlot"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step18Executed",
+          "simulation": "PartPlacedAtWarehouse"
+        }
+      }
+    },
+    {
+      "stepId": 19,
+      "topic": "Storage",
+      "command": {
+        "targetId": "i4.sdu.dk/Storage/Effimat",
+        "operation": "returnCarrier",
+        "parameters": {
+        },
+        "notifications": {
+          "dashboard": "step19Started",
+          "simulation": "PutCarrierBack"
+        },
+        "insertReceivedParameters": ["effimatReferenceId"]
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step19Executed",
+          "simulation": "CarrierInStock"
+        }
+      }
+    },
+    {
+      "stepId": 20,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/ER",
+        "operation": "moveToCharger",
+        "parameters": {
+          
+        },
+        "notifications": {
+          "dashboard": "step20Started"
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        },
+        "notifications": {
+          "dashboard": "step20Executed"
+        }
+      }
+    }
+  ]
+}

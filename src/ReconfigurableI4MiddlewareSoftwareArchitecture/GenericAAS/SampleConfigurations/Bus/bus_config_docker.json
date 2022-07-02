@@ -1,0 +1,9 @@
+{
+    "communicationprotocol_parameters":{
+        "type": "KAFKA",
+        "host":"kafka1",
+        "port":"19092"
+    }, 
+    "subscribe_topics":["Assembly", "general_asset"],
+    "status_topic": "Status"
+}

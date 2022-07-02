@@ -1,0 +1,116 @@
+{
+  "recipeName":  "Cell1RightCell2LeftStub",
+  "steps": [
+    {
+      "stepId": 9,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "MoveAssemblyPart",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 9,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "LoadOnTrack",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 9,
+      "topic": "Assembly",
+      "command": {
+        "targetId": "i4.sdu.dk/Assembly/UR1",
+        "operation": "Cell1RotateRight",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },{
+      "stepId": 9,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "TaskCompleteCell1",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 9,
+      "topic": "Assembly",
+      "command": {
+        "targetId": "i4.sdu.dk/Assembly/UR2",
+        "operation": "Cell2RotateLeft",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 9,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "TaskCompleteCell2",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    },
+    {
+      "stepId": 9,
+      "topic": "Transport",
+      "command": {
+        "targetId": "i4.sdu.dk/Transport/Track",
+        "operation": "LoadOffTrack",
+        "capabilityId": "AssembleLegsOnDrone",
+        "parameters": {
+        }
+      },
+      "response": {
+        "parameters": {
+          "success": null
+        }
+      }
+    }
+  ]
+}

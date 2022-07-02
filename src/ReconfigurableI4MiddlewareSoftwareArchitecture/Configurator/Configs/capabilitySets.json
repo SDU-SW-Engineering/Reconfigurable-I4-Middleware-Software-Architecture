@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "capabilities": [
+      "MoveAssemblyPart",
+      "LoadOnTrack",
+      "Cell1RotateRight",
+      "TaskCompleteCell1",
+      "Cell2RotateLeft",
+      "TaskCompleteCell2",
+      "LoadOffTrack"
+    ]
+  },
+  {
+    "id": 2,
+    "capabilities": [
+      "MoveAssemblyPart",
+      "LoadOnTrack",
+      "Cell1RotateLeft",
+      "TaskCompleteCell1",
+      "Cell2RotateRight",
+      "TaskCompleteCell2",
+      "LoadOffTrack"
+    ]
+  },
+  {
+    "id": 3,
+    "capabilities": [
+      "MoveAssemblyPart",
+      "LoadOnTrack",
+      "Cell1RotateRight",
+      "TaskCompleteCell1",
+      "Cell2RotateRight",
+      "TaskCompleteCell2",
+      "LoadOffTrack"
+    ]
+  },
+  {
+    "id": 4,
+    "capabilities": [
+      "MoveAssemblyPart",
+      "LoadOnTrack",
+      "Cell1RotateLeft",
+      "TaskCompleteCell1",
+      "Cell2RotateLeft",
+      "TaskCompleteCell2",
+      "LoadOffTrack"
+    ]
+  }
+]

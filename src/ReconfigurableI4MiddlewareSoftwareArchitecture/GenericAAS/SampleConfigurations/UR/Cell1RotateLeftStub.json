@@ -1,0 +1,90 @@
+{
+  "communicationprotocol_parameters": {
+    "id": "UR",
+    "type": "MQTT",
+    "host": "public_mqtt",
+    "client_id": "cell1RotateLeft",
+    "port": "1883",
+    "requiredSubscriptions": [
+      "Cell_1/Operations/operationStarted",
+      "Cell_1/Operations/operationComplete"
+    ]
+    
+  },
+  "execution_flow": {
+    "ID": "<UUID>",
+    "capabilityId": "Cell1RotateLeft",
+    "steps": [
+      {
+        "id": "<UUID>",
+        "orderId": "1",
+        "protocol": "MQTT",
+        "method": "Publish",
+        "parameters": {
+          "topic": "Cell_1/Operations/startOperation",
+          "message": "{\"start\":1, \"operationId\":\"123456\", \"cellId\":\"1\"}"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "2",
+        "protocol": "MQTT",
+        "method": "Subscribe",
+        "parameters": {
+          "topic": "Cell_1/Operations/operationStarted"
+        },
+        "condition": {
+          "value": "{\"cellId\":\"1\",\"operationId\":\"123456\", \"started\":1 }",
+          "time": "100000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "3",
+        "protocol": "MQTT",
+        "method": "Subscribe",
+        "parameters": {
+          "topic": "Cell_1/Operations/operationComplete"
+        },
+        "condition": {
+          "value": "{\"cellId\":\"1\", \"operationId\":\"123456\", \"complete\":1}",
+          "time": "100000",
+          "on_time_satisfied": "ERROR",
+          "on_value_satisfied": "CONTINUE"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "4",
+        "protocol": "MQTT",
+        "method": "Publish",
+        "parameters": {
+          "topic": "Cell_1/Operations/startOperation",
+          "message": "{\"cellId\":\"1\",\"start\":0}"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "5",
+        "protocol": "MQTT",
+        "method": "Publish",
+        "parameters": {
+          "topic": "Cell_1/Operations/operationStarted",
+          "message": "{\"cellId\":\"1\",\"started\":0}"
+        }
+      },
+      {
+        "id": "<UUID>",
+        "orderId": "6",
+        "protocol": "MQTT",
+        "method": "Publish",
+        "parameters": {
+          "topic": "Cell_1/Operations/operationComplete",
+          "message": "{\"cellId\":\"1\",\"complete\":0}"
+        }
+      }
+    ]
+  }
+}

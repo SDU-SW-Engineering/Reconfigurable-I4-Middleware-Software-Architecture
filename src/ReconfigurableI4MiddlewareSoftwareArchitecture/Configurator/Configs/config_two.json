@@ -1,0 +1,24 @@
+{
+  "id": "drone_two",
+  "services": [
+    {
+      "serviceId": "i4.sdu.dk/Assembly/UR3",
+      "bus": "SampleConfigurations/Bus/bus_config_docker.json",
+      "asset": [
+        "SampleConfigurations/UR/ur3_config_docker.json"
+      ]
+    },{
+      "serviceId": "i4.sdu.dk/Assembly/UR4",
+      "bus": "SampleConfigurations/Bus/bus_config_docker.json",
+      "asset": [
+        "SampleConfigurations/UR/ur4_config_docker.json"
+      ]
+    },{
+      "serviceId": "i4.sdu.dk/Transport/Track",
+      "bus": "SampleConfigurations/Bus/bus_config_docker.json",
+      "asset": [
+        "SampleConfigurations/Track/opcua_config_docker.json"
+      ]
+    }
+  ]
+}
