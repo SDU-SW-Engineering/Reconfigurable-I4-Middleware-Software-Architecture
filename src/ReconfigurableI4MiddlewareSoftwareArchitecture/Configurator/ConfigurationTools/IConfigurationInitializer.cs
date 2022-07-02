@@ -5,6 +5,9 @@ using Configurator.Model;
 
 namespace Configurator.ConfigurationTools
 {
+    /// <summary>
+    /// Responsible for initializing a configuration, i.e. one or more services.
+    /// </summary>
     public interface IConfigurationInitializer
     {
         /// <summary>

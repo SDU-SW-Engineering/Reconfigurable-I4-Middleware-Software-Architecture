@@ -1,8 +1,12 @@
 ﻿using System;
 using GenericAAS.BusCommunication;
 
-namespace GenericAAS.Controller
-{
+namespace GenericAAS.Controller{
+
+    /// <summary>
+    /// Responsible for handling the bus messages, i.e. sending an execution request to the
+    /// IExecutionHandler or responding with the required information.
+    /// </summary>
     public interface IController
     {
         public void Initialize();

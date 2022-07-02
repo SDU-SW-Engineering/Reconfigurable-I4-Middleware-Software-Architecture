@@ -26,7 +26,7 @@ namespace GenericAAS.AssetCommunication
             _source = source;
             _log = log;
         }
-
+        
         public ConditionHandler(Condition condition, II4Logger log) : this(DEFAULT_SOURCE, condition, log)
         {
         }

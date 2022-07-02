@@ -3,6 +3,9 @@ using Configurator.Model;
 
 namespace Configurator.ConfigurationTools
 {
+    /// <summary>
+    /// Responsible for assessing a list of capability sets and choosing the best based on chosen criteria and/or algorithms
+    /// </summary>
     public interface IConfigurationAssessor
     {
         /// <summary>

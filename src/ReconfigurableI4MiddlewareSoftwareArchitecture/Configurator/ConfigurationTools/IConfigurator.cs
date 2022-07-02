@@ -2,6 +2,9 @@ using Configurator.DomainObjects;
 
 namespace Configurator.ConfigurationTools
 {
+    /// <summary>
+    /// Responsible for managing the entire reconfiguration process, i.e. finding, assessing, mapping and initializing a configuration.
+    /// </summary>
     public interface IConfigurator
     {
         /// <summary>

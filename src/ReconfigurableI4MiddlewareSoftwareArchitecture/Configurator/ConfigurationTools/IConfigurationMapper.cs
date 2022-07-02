@@ -3,6 +3,10 @@ using Configurator.Model;
 
 namespace Configurator.ConfigurationTools
 {
+    /// <summary>
+    /// Responsible for mapping capabilities to services, and thus defines what services need
+    /// to be started in order for the system to be able to fulfil certain capability requests
+    /// </summary>
     public interface IConfigurationMapper
     {
         /// <summary>

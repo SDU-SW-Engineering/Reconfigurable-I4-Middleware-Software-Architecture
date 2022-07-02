@@ -4,6 +4,9 @@ using Configurator.Model;
 
 namespace Configurator.ConfigurationTools
 {
+    /// <summary>
+    /// Responsible for finding a list of capability sets matching a list of requested capabilities
+    /// </summary>
     public interface IConfigurationFinder
     {
         /// <summary>

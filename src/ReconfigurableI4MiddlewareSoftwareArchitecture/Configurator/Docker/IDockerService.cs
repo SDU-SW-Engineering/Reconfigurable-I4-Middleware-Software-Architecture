@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Configurator.Docker
 {
+    /// <summary>
+    /// Responsible for Starting services as docker containers.
+    /// </summary>
     public interface IDockerService
     {
         /// <summary>

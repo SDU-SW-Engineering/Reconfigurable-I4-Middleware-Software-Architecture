@@ -4,6 +4,9 @@ using Newtonsoft.Json.Linq;
 
 namespace GenericAAS.Controller
 {
+    /// <summary>
+    /// Not Used
+    /// </summary>
     public interface IStatusUpdateHandler
     {
         public void AddDefaultUpdateSource(string sourceName, Func<JObject> statusFunction);
