@@ -62,8 +62,8 @@ namespace Configurator.Docker
                     },
                     new AuthConfig
                     {
-                        Username = "sieben8nein",
-                        Password = "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"
+                        Username = "username",
+                        Password = "password"
                     },
                     progress);
                 _log.LogDebug(GetType(), "Finished loading image {imageid}:{tag}, progress: {progress}", imageId, tag, progress.ToJson());
