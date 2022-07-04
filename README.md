@@ -11,7 +11,7 @@ Initial description...
 ![Allocation view](docs/Mod_Orchestrator_Full.svg)
 
 #### Configurator
-![Allocation view](docs/mod)
+![Allocation view](docs/Mod_Orchestrator_Full.svg)
 
 #### Generic Service
 ![Allocation view](docs/Mod_GenericAsset_Small.svg)
@@ -32,7 +32,7 @@ Description of allocation view...
 ### Activitiy Diagrams
 
 #### Orchestrator: Production process
-![Allocation view](docs/se)
+![Allocation view](docs/Seq_Orchestrator_NormalFlow.svg)
 
 #### Configurator: Prepare for initializatin
 ![Allocation view](docs/Seq_Configurator_Preparation.svg)
