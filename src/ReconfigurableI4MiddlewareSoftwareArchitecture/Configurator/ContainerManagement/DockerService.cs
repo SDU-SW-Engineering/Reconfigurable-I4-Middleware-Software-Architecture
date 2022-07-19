@@ -9,10 +9,8 @@ using Docker.DotNet.Models;
 using I4ToolchainDotnetCore.Logging;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
-using Serilog;
-using VDS.RDF.Query.Aggregates.Sparql;
 
-namespace Configurator.Docker
+namespace Configurator.ContainerManagement
 {
     public class DockerService: IDockerService
     {

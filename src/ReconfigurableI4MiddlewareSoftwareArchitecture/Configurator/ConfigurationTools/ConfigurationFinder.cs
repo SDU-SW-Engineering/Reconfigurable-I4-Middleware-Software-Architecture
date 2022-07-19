@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Configurator.Docker;
+using Configurator.ContainerManagement;
 using Configurator.DomainObjects;
 using Configurator.Exceptions;
 using Configurator.Model;

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using Configurator.ConfigurationTools;
-using Configurator.Docker;
+using Configurator.ContainerManagement;
 using Docker.DotNet;
 
 namespace Configurator

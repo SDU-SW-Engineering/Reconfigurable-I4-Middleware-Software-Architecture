@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Configurator.Docker;
+using Configurator.ContainerManagement;
 using Configurator.DomainObjects;
 using Configurator.Exceptions;
 using Configurator.Model;

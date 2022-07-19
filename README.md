@@ -42,12 +42,71 @@ The purpose of the following class diagrams is to provide an overview of the fun
 The notation of the coarse grained view is based on the "uses" style presented by Documenting Software Architecture.
 The notation of the fine grained view is based on UML, including both the "uses" style and the generalization style presented in Documenting Sofware Architecture
 For each class diagram, an Element catalogue is provided to describe the individual elements.
-#### Orchestrator Class Diagram
+#### **Orchestrator Class Diagram**
+***Coarse grained view***
+
+The following figure shows the coarse grained module view of the Orchestrator.
+The purpose of the DataModel is to define the structure of an Order and provide access to a Recipe.
+The Order is responsible for Product information.
+It includes type, how many to produce, and the Recipe for producing a Product. 
+The Recipe defines how a Product should be produced, i.e. the product ID and a list of required steps to produce the Product. 
+A Step in a Recipe defines the required interaction with a Service by describing a request and an expected response.
+For instance, the request defines where the request should be sent to, and the response defines what the response should contain.
+The Product is responsible for containing all the information for a single Product, including the current status and the production logs. 
+
+The purpose of the Coordination module is to organize the communication flow between services.
+The responsibility of the ICoordinator is to manage the queue of orders and coordinate the execution of an Order, i.e. managing the IChef implementations. 
+The IChef is responsible for handling the production of a single Product based on a Recipe.
+The Coordination module imports the DataModel module to access information about the Order to produce the product.
+The Coordination module uses the BusCommunication module to interact with the message bus and the RecipeInterpretation module to interpret recipes when required.
+
+The purpose of the RecipeInterpretation module is to interpret recipes from a file or a message received from the message bus. 
+It enables applications from the business layer, e.g. ERP or MES, to send order requests with a Recipe for the products.
+The RecipeInterpretation module imports the DataModel module to access Recipe data and translate files or messages to Recipe objects.
 
 ![Allocation view](docs/Mod_GenericAsset_Small.svg)
+
+***Fine grained view***
+
+The following figure shows the fine grained, i.e. more detailed view of the previous Orchestrator module view. Additionally, it shows how the I4ToolchainDotNetCore library is used in connection with the orchestrator. Below the diagram, a description for each element can be found in the element catalogue.
+
 ![Allocation view](docs/Mod_Orchestrator_Full.svg)
 
-- I4ToolChainDotnetCore
+***Element catalogue***
+| Level 1 | Level 2 | Level 3 | Level 4 | Description |
+|---|---|---|---|---|
+| I4ToolChainDotnetCore | IKafkaMessageHandler |  |  | Responsible for handling all the incomming kafka messages |
+|  | IKafkaReceiver |  |  | Responsible for receiving messages from multiple topics, the client can subscribe to multiple topics at once, add new ones and remove them again |
+|  | IOperationManager |  |  | Responsible for managing an incoming operation request, i.e. finding the right IOperation implementation matching the requested operation and initializing the execution. |
+|  | Message |  |  | Describing the general message structure used to communicate over the message bus. |
+|  | IOperation |  |  | Responsible for executing an operation, typically implemented by multiple implementations to facilitate multiple operations that can be created and executed (Only used by the Orchestrator) |
+|  | IKafkaProducer |  |  | Responsible for sending messages to one or more specified topics |
+| I4-Orchestrator-DotnetCore | Program |  |  | Responsible for initializing the application and setup dependency injection |
+|  | Service | IConfigurationHandler |  | The IConfigurationHandler is not used in the setup deployed for the use case study |
+|  |  | StartSequenceOperation |  | Responsible for handling the operation related to executing an order, i.e. sending an order execution request to the ICoordinator and once completed or failed respond to the original order issuer via kafka. |
+|  |  | ResetSequenceOperation |  | Not used in the setup deployed for the use case study |
+|  | DomainModel | Order |  | Responsible for containing all information related to an order, as well as pushing events to subscribers using provided methods. Subscribers can subscribe to completion or failure of the order. |
+|  |  | Product |  | Responsible for containing all information related to a product, as well as pushing events to subscribers using provided methods. Subscribers can subscribe to completion or failure of the product. |
+|  |  | CapabilityResponseMessage |  | Defining the message structure used for messages coming from the configurator via kafka to notify the orchestrator of a configuration that is ready to be initialized |
+|  |  | AvailabilityNotification |  | Message type used internally to notify the orchestrator that one of the chefs is avaiable again and thus ready to produce another product |
+|  |  | CapabilityRequestMessage |  | Defining the message structure used for messages to the configurator via kafka to request a configuration for a set of capabilities. |
+|  |  | CapabilitiesReadyMessage |  | Defining the message structure used for messages coming from the configurator via kafka to notify the orchestrator that the requested configuration is initialized |
+|  | Adapter | ICoordinator |  | Responsible for managing the execution of an Order, i.e. managing the individual chefs and coordinating the production of all products required to fulfil the order. |
+|  |  | ICookbook |  | Responsible for storing and providing access to recipes |
+|  |  | IChef |  | Responsible for producing a product based on the defined recipe. While executing the individual steps, the product is updated to enable future traceability. |
+|  |  | INotifier |  | THe INotifier is not used in the execution of this use case study |
+|  |  | RecipeInterpretation | Recipe | Responsible for defining all setps required to produce a product. |
+|  |  |  | Step | A step defines both the topic to send a command to, the command and the expected response if the command has been executed successfully. |
+|  |  |  | Command | Defines the target of the command, the operation/capability to be executed and if required also parameters |
+|  |  |  | Response | Defines the parameters expected in the response, typically "success" with a boolean value. |
+|  |  |  | RecipeInterpreter | Responsible for converting json data to recipes. |
+|  |  | Kafka | IKafkaMultiConsumer | Responsible for the handling the subscription to multiple kafka topics |
+|  |  | KafkaMessage |  | Used for internal message flow in connection with the IObservable pattern implemented in C#. Subscribers are subscribing to the topics using the IKafkaMulticonsumer to centralze the kafka subscription. |
+|  |  | KafkaUnsubscriber |  | Used in connection with the IObservable pattern implemented in C# to unsubscribe to topics |
+
+
+
+<!-- - I4ToolChainDotnetCore
   - IKafkaMessageHandler
     - Responsible for handling all the incomming kafka messages
   - IKafkaReceiver
@@ -109,13 +168,62 @@ For each class diagram, an Element catalogue is provided to describe the individ
       - KafkaMessage
         - Used for internal message flow in connection with the IObservable pattern implemented in C#. Subscribers are subscribing to the topics using the IKafkaMulticonsumer to centralze the kafka subscription. 
       - KafkaUnsubscriber
-        - Used in connection with the IObservable pattern implemented in C# to unsubscribe to topics.
+        - Used in connection with the IObservable pattern implemented in C# to unsubscribe to topics. -->
 
-#### Configurator Class Diagram
+#### **Configurator Class Diagram**
+***Coarse grained view***
+The following figure shows the coarse grained module view of the Configurator.
+%The DataModel module's purpose is to define the data classes and provide access to the required data.
+%The DataModel provides access to the CapabilitySet, which is responsible for describing sets of capabilities.
+The DataModel provides access to the CapabilitySet, which defines capability sets for the system.
+It also provides access to the AssetCapabilityMapping that defines what capabilities are available per asset.
+
+The purpose of the ConfigurationManagement module is to handle the stages: 1) finding configurations, 2) assessing and mapping the configurations, and 3) initializing a configuration.
+The IConfigurator is responsible for the management of the process, i.e. enabling the transition from one stage to the other. 
+The IConfigurationFinder is responsible for finding capability sets based on the requested capabilities in stage 1.
+The IConfigurationAssessor and ConfigurationMapper are responsible for stage 2, i.e. assessing the capabaility sets that have been found and map a capability to an asset.
+The IConfigurationInitializer is responsible for initializing the assets that have been chosen in the previous stage using the ContainerManagement module in stage 3.
+The ConfigurationManagement module imports the DataModel module to access the CapabilitySet and the AssetCapabilityMapping functionality. 
+ConfigurationManagement uses the BusCommunication module to interact with the message bus and the ContainerManagement module to manage services.
+
+The purpose of the ContainerManagement module is to manage the lifetime of services.
+IContainerService is responsible for asynchronously starting and stopping the services, i.e. creating, starting, and stopping containers.
+In this case study, Docker is implemented for container management, indicated by the DockerService module.
+The services are started asynchronously to minimize the time required for starting a configuration with multiple services.
+
 ![Allocation view](docs/Mod_Configurator_Small.svg)
+
+***Fine grained view***
+
+The following figure shows the fine grained, i.e. more detailed view of the previous Configurator module view. Below the diagram, a description for each element can be found in the element catalogue.
+
 ![Allocation view](docs/Mod_Configurator_Full.svg)
 
-- ConfigurationManagement
+***Element catalogue***
+
+| Level 1 | Level 2 | Level 3 | Description |
+|---|---|---|---|
+| ConfigurationManagement | IConfigurator |  | Responsible for managing the entire reconfiguration process, i.e. finding, assessing, mapping and initializing a configuration |
+|  | IConfigurationFinder |  | Responsible for finding a list of capability sets matching a list of requested capabilities |
+|  | IConfigurationAssessor |  | Responsible for assessing a list of capability sets and choosing the best based on chosen criteria and/or algorithms |
+|  | IConfigurationMapper |  | Responsible for mapping capabilities to services, and thus defines what services need to be started in order for the system to be able to fulfil certain capability requests |
+|  | IConfigurationInitializer |  | Responsible for initializing a configuration, i.e. one or more services. |
+| DataModel | MessageTypes | AssetStartResponse | Message type used by the Services as the initial heartbeat, indicating that they have started successfully |
+|  |  | ConfigurationRequest | Message type used by the Orchestrator to request a configuration based on a list of required capabilities |
+|  |  | InitializationRequest | Message type used by the Orchestrator to request the initialization of a configuration, i.e. the services required to start the execution of an order. |
+|  |  | AssetStopResponse | Message type used by the services to notify the configuator that they are ready to be shut down |
+|  |  | ConfigurationResponse | Message type used by the Configurator to notify the orchestrator that a configuration has been found and is ready to be initialized. |
+|  | PreparedConfiguration |  | The configuration that has been prepared, i.e. a set of services that can be initialized when requested. The services have been previously been identified based on a set of required capabilities to execute an order |
+|  | AssetCapabilityMapping |  | A mapping between a service configuration and the capabilities it is able to fulfill with the service configuration. |
+|  | Configuration |  | Not used in connection with this use case study |
+|  | ServiceSetupInformation |  | Defines the service configuration, i.e. the serviceId, the location of the bus configuration and the location of the asset configurations. |
+|  | CapabilitySet |  | A set of capabilities |
+|  | Recipe |  | Not used in connection with this use case study |
+|  | Step |  | Not used in connection with this use case study |
+| ContainerManagement | IContainerService |  | Responsible for managing the services as docker containers. This includes starting the service with a specified service ID, including the path for the bus configuration and the path for the asset configurations, as well as stopping them again. |
+| BusCommunication | KafkaMessageHandler |  | Responsible for handling the messages received via kafka |
+
+<!-- - ConfigurationManagement
   - IConfigurator
     - Responsible for managing the entire reconfiguration process, i.e. finding, assessing, mapping and initializing a configuration.
   - IConfigurationFinder
@@ -156,11 +264,72 @@ For each class diagram, an Element catalogue is provided to describe the individ
   - IDockerService
     - Responsible for managing the services as docker containers. This includes starting the service with a specified service ID, including the path for the bus configuration and the path for the asset configurations, as well as stopping them again.
 - BusCommunication
-  - KafkaMessageHandler
-#### Generic Service Class Diagram
+  - KafkaMessageHandler -->
+#### **Generic Service Class Diagram**
+***Coarse grained view***
+The following figure shows the coarse grained module view of a Service. 
+
+The DataModel module's purpose is to define the data classes and provide access to the required data.
+The responsibility of the BusConfig is to define the information required to establish a connection to a message bus. 
+For instance, enabling the connection to a Kafka broker (example of a message bus) includes the host and port of the running Kafka broker instance and the initial topics to subscribe to. 
+
+The ExecutionFlow is responsible for describing the asset through the AssetConfig and the steps required to invoke a capability. 
+Each Step defines the required interaction with the asset, including the parameters to define the expected request and response.
+For instance, to initiate a production cell, the first step describes a command and where to publish the command, e.g. a JSON message and a MQTT topic .
+The AssetConfig is responsible for defining the information required to establish a connection to the asset.
+For instance, AssetConfig includes both the host and port of the MQTT broker and the initial subscription topics. 
+
+The purpose of the BusCommunication module is to provide a communication layer and an abstraction layer for various bus technologies. 
+It is reused in the Orchestrator and the Configurator and contains the same functionality and thus only described once.
+It enables the opportunity to add or change to other bus technologies effortlessly, i.e. avoid changes in other parts of the system.
+The responsibility of the IBusClientFactory is to create an instance of the IBusClient. 
+The proposed setup is based on an implementation of the Kafka message bus client is included that manages both a kafka-producer and a kafka-consumer in the KafkaBusCommunication module. 
+The BusCommunication module imports the BusConfig from the DataModel to establish communication with the message bus.
+
+The purpose of the AssetCommunication module is to provide a communication layer and abstraction layer for various asset communication protocols, e.g. OPC UA and MQTT. 
+It enables the opportunity to add or change to other asset protocols effortlessly. 
+The responsibility of the IAssetClientFactory is to create an instance of the IAssetClient, which in the setup is an implementation of the MQTT client or the OPCUA client (MQTT and OPCUA module, respectively).
+The AssetCommunication module imports the AssetConfig, the ExecutionFlow, and the Step classes to establish communication and interaction with the asset.
+
+The purpose of the Controller module is to 1) initialize the Service, 2) handle the incoming messages, and 3) handle the execution of execution flows.
+The responsibility of the IController is to initialize the Service, i.e. initialize the IBusClient and the IAssetClients based on the BusConfig and AssetConfig, respectively.
+Subsequently, the IController is responsible for handling the incoming message from the IBusClient, i.e. responding with requested information or queueing an execution request.
+The IExecutionHandler handles the queued execution requests and invokes the requested capabilities.
+The Controller uses the BusCommunication module to interact with the message bus and the AssetCommunication module to interact with the asset. 
+The Controller imports the DataModel to access the BusConfig and the ExecutionFlow as they are required to set up the IBusClient and the IAssetClient.
 ![Allocation view](docs/Mod_GenericAsset_Small.svg)
+
+***Fine grained view***
+
+The following figure shows the fine grained, i.e. more detailed view of the previous Configurator module view. Below the diagram, a description for each element can be found in the element catalogue.
+
 ![Allocation view](docs/Mod_GenericAsset_Full.svg)
-- Controller
+
+***Element catalogue***
+
+| Level 1 | Level 2 | Level 3 | Description |
+|---|---|---|---|
+| Controller | IController |  | Responsible for handling the bus messages, i.e. sending an execution request to the IExecutionHandler or responding with the required information. |
+|  | IExecutionHandler |  | Responsible for initializing the executionhandler, i.e. loading the executionflows and providing an implementation of the IBusClient. |
+| DataModel | ExecutionFlow |  | The ExecutionFlow is responsible for describing the asset through the AssetConfig and the steps required to invoke a capability |
+|  | Step |  | Each Step defines the required interaction with the asset, including the parameters to define the expected request and response. For instance, to initiate a production cell, the first step describes a command and where to publish the command, e.g. a JSON message and a MQTT topic. |
+|  | Condition |  | A condition is used in connection with the response of a step, i.e. if a request is sent out, the condition specifies the expected response and subsequent reaction. For instance when requesting the execution of a task, be might expect a response containing "success" within 30 seconds. If the condition is satisfied, we might want to go on to the next step, and if the timer has run out, we might want to stop the entire executionflow. |
+|  | REACTION |  | Used in connection with a condition, currently used to specify if the execution of the execution flow should continue or stop based on the reesponse. |
+|  | ExecutionRequest |  | containing information about the capability that should be executed. |
+|  | EXECUTION_PRIORITY |  | Depending on the urgency of the request, the requestee can specify if it is important or not, where the important messages will be handled first. |
+| BusCommunication | IBusClient |  | Responsible for handling the interaction with the message bus. |
+|  | BusMessage |  | Defines the message structure of messages coming from other services |
+|  | IBusClientFactory |  | Responsible for creating a bus client based on the provided configuration. |
+|  | BUS_TYPE |  | Enum used to define different bus types, currently only Kafka is used |
+|  | Kafka | IKafkaReceiver | Responsible for receiving messages from multiple topics, the client can subscribe to multiple topics at once, add new ones and remove them again |
+|  |  | IKafkaProducer | Responsible for sending messages to one or more specified topics |
+| AssetCommunication | IAssetClient |  | Responsible for the direct interaction with the asset |
+|  | IAssetClientFactory |  | Responsible for creating an asset client based on the provided configuration. |
+|  | IConditionHandler |  | Responsible for handling and updating conditions. Conditions are used when waiting for feedback, e.g. a condition could be we have to receive a certain response within 10 seconds, if received, production should continue, if not, production should stop. |
+|  | MQTT | MQTTAssetClient | Responsible for handling communication via MQTT |
+|  | OPCUA | OPCUAClient | Responsible for handling communication via OPCUA |
+
+<!-- - Controller
   - IController
     - Responsible for handling the bus messages, i.e. sending an execution request to the IExecutionHandler or responding with the required information.
   - IExecutionHandler
@@ -202,7 +371,7 @@ For each class diagram, an Element catalogue is provided to describe the individ
       - Responsible for handling communication via MQTT
   - OPCUA
     - OPCUAClient
-      - Responsible for handling communication via OPCUA
+      - Responsible for handling communication via OPCUA -->
 ### Allocation View
 The following allocation view describes the mapping between the software architecture and its environment (Taken from Documenting Software Architecture, should probably be a reference).
 The allocation view is based on the Deployment Style presented in Documenting Software Architecture, as it is able to provide a good overview of how the software is allocated to the hardware. The software elements describe relevant properties related to the interaction between the components using kafka, such as the topics and consumer group. If the software element is an external software deployed using docker, a version number of the software is provided (Argumentation for why there is a version number on?). The hardware elements include relevant aspects that might influence the setup.

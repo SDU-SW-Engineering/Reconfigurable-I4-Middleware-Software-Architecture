@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Configurator.Docker
+namespace Configurator.ContainerManagement
 {
     /// <summary>
     /// Responsible for Starting services as docker containers.
