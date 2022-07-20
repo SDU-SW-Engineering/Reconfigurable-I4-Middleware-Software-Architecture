@@ -1,7 +1,8 @@
 # A Reconfigurable Industry 4.0 Middleware Software Architecture
 This repository is used as an extension to the documentation provided in Paper X. The primary purpose is to explain the functionality of the system and the structure of the code base found in in the /src folder. The ensuing sections are subdivided as follows:
 1. Brief description and ToC of the source code in the /src folder.
-2. Documentation of the code, subdivided into Class Diagrams, Component and Connector Views and Sequence Diagrams.
+2. Guide on how to build the project using command line tools
+3. Documentation of the code, subdivided into Class Diagrams, Component and Connector Views and Sequence Diagrams.
 
 
 ## Content Overview
@@ -35,6 +36,25 @@ The documentation for the system modules is provided in the /docs folder. The fo
     - [Sequence Diagram of production process](#orchestrator-production-process)
   - Toolchain
     - Enacts a library to reuse code in relation to kafka communication.
+
+## Build guide
+The following guide describes the prequisits and process for building and interacting with the project.
+### Prerequisits
+The following prerequisits are required to build the project.
+- The .Net SDK must be installed, see official guide: [Guide](https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60)
+- This repository must be downloaded.
+
+### Build
+To build the project, execute the following steps.
+- Open the CLI inside the root folder of this repository.
+- Use the following command to build the respective project:
+  - Configurator
+    - *dotnet build ./src/ReconfigurableI4MiddlewareSoftwareArchitecture/Configurator*
+  - GenericAAS
+    - *dotnet build ./src/ReconfigurableI4MiddlewareSoftwareArchitecture/GenericAAS*
+  - Orchestrator
+    - *dotnet build ./src/ReconfigurableI4MiddlewareSoftwareArchitecture/Orchestrator*
+
 ## Documentation
 
 ### Class Diagrams
