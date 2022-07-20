@@ -383,25 +383,34 @@ The hardware and software properties of the Track server and the Production cell
 ![Allocation view](docs/Allocation.svg)
 
 ### Component and Connector View
+The following component and connector (C&C) views visualize the internal structure at runtime of the components described previously in the module view. The style used for these C&C views is based on the client-server style described in the Documenting Software Architecture book by Clements et.al., page 162. 
+<!-- 
 - What are the major executing components and how do they interact at runtime?
 - What are the major shared data stores?
 - Which parts of the system are replicated?
 - How does data progress through the system?
 - What parts of the system can run in parallel?
-- Can the system’s structure change as it executes and, if so, how?
-#### Orchestrator CC
-The major executing components in this view are the KafkaClient, the Coordinator and the Chef. The KafkaClient is responsible for interacting with a Kafka broker, thus 
-![CC view of orchestrator](docs/CC_Orchestrator.svg)
-#### Configurator CC
-![CC view of conigurator](docs/CC_Configurator.svg)
+- Can the system’s structure change as it executes and, if so, how? -->
 
-#### Generic Service CC
+
+#### **Orchestrator CC**
+The following C&C diagram shows the structure of the internal components of the **Orchestrator** at runtime. A single **KafkaMessageHandler** instance is responsible for retrieving messages from kafka and forwarding them to an instance of the **OperationManager**. As there can be multiple order requests, multiple intances of the **StartSequenceOperation** can be created and handled at a time, and thus run in parallel with multiple threads. Each **StartSequenceOperation** interacts with the single instance of the **Coordinator**. The **Coordinator** interacts with one or more **Chef** instances, which are responsible for the production of individual products. The **Chefs** run in parallel with individual threads to enable multiple productions at a time, i.e. produce multiple products at a time. Each **Chef** interacts with the **KafkaClient** that enables interaction with the **Kafka Message Bus** to be able to interact with the different services.
+
+![CC view of orchestrator](docs/CC_Orchestrator.svg)
+
+#### **Configurator CC**
+The following C&C diagram shows the structure of the internal components of the Configurator at runtime. A single **KafkaClient** instance is responsible for retrieving messages from kafka and forwarding them to an instance of the **Configurator**. The Configurator interacts with an intance of the **ConfigurationFinder**, the **ConfigurationAssessor**, the **ConfigurationMapper** and the **ConfigurationInitializer** to handle configuration requests. Both the **ConfigurationFinder** and the **ConfigurationMapper** interact with a **Database** (DB) to retrieve capability-sets and capability-mappings respectively. The **ConfigurationInitializer** interacts with an instance of the **DockerService** to create and destroy containers, i.e. services. In this case study, Docker is used for container management, thus a connector to the **Docker API** is included.
+
+![CC view of configurator](docs/CC_Configurator.svg)
+
+#### **Generic Service CC**
+The following C&C diagram shows the structure of the internal components of the Generic Service at runtime. 
+A single **BusClient** instance is responsible for retrieving messages from Kafka and forwarding them to the **Controller**. If the message is an information request, the **Controller** responds by interacting with the **BusClient**. The **Controller** interacts with a single instance of the **Executionhandler** to enqueue capability-requests. The **ExecutionHandler** interacts with a single instance of the **AssetClient**, e.g. **MQTTAssetClient** to interact with the **Assets** via the **Asset API**. Once the capability-requests is fulfilled, the **ExecutionHandler** interacts with the **BusClient** to send a confirmation to the Message Bus.
+
 ![CC view of generic service](docs/CC_GenericService.svg)
 
 ### Activitiy Diagrams
-- Purpose
-- Key Components
-- Interaction
+The following diagrams visualize the activities of the individual components, focusing on only on aspects relevant to the reconfiguration process or analysis of the reconfiguration process.
 #### Orchestrator - Production process
 The purpose of this diagram is to visualize the interactions between the architectural elements that are required to execute an order, i.e. interact with the configurator to configure the system based on an order and subsequently produce the products specified in the order.
 The interaction is initialized with a message received via Kafka, that contains an order request. The KafkaMessagehandler receives the message, interprets the message type and hands it over to the IOperationManager. The IOperationManager interprets the required operation to handle the Order request and hands it over to the StartSequenceOperation, as it is an order Request. It would e.g be a different operation if the order request would contain the recipe for the products to be produced, but the recipe is not included in the call described in this diagram. The StartSequenceOperation interacts with the ICoordinator to initialize the order. The ICoordinator is then responsible for finding the recipe based on the product specified in the order request. If the recipe is found, an order object is created to enable further 
