@@ -1,5 +1,6 @@
 # A Reconfigurable Industry 4.0 Middleware Software Architecture
-This repository is used as an extension to the documentation provided in Paper X. The primary purpose is to explain the functionality of the system and the structure of the code base found in in the /src folder. The ensuing sections are subdivided as follows:
+<--!This repository is used as an extension to the documentation provided in Paper X.-->
+The primary purpose is to explain the functionality of the system and the Software Architecture of the code base found in in the /src folder. The ensuing sections are subdivided as follows:
 1. Brief description of the source code in the /src folder.
 2. Guide on how to build the project using command line tools
 3. Documentation of the code, subdivided into Class Diagrams, Component and Connector Views and Sequence Diagrams.
