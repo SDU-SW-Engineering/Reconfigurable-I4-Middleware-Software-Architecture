@@ -42,7 +42,7 @@ The following guide describes the prequisits and process for building and intera
 ### Prerequisits
 The following prerequisits are required to build the project.
 - The .Net SDK must be installed, see official guide: [Guide](https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60)
-- This repository must be downloaded.
+- Download [Reconfigurable-I4-Middleware-Software-Architecture](https://github.com/SDU-SW-Engineering/Reconfigurable-I4-Middleware-Software-Architecture) repository.
 
 ### Build
 To build the project, execute the following steps.
