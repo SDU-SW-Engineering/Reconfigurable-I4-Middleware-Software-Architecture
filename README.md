@@ -46,7 +46,7 @@ The following prerequisits are required to build the project.
 
 ### Build
 To build the project, execute the following steps.
-- Open the CLI inside the root folder of this repository.
+- Open the Command Line Interface (e.g. Terminal) inside the root folder of this repository.
 - Use the following command to build the respective project:
   - Configurator
     - *dotnet build ./src/ReconfigurableI4MiddlewareSoftwareArchitecture/Configurator*
