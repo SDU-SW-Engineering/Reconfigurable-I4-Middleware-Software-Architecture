@@ -5,6 +5,7 @@ The primary purpose is to explain the functionality of the system and the Softwa
 2. Guide on how to build the project using command line tools
 3. Documentation of the code, subdivided into Class Diagrams, Component and Connector Views and Sequence Diagrams.
 
+Note that the images a clickable and thus enable zoom in case of unintelligable diagrams due to small size. The individual images can also be found in the /docs folder.
 
 ## Content Overview
 
@@ -62,7 +63,7 @@ To build the project, execute the following steps.
 The purpose of the following class diagrams is to provide an overview of the functionality of the system and the structure of the code base. For each view, both a coarse and a fine grained view are presented.
 The notation of the coarse grained view is based on the "uses" style presented by Documenting Software Architecture.
 The notation of the fine grained view is based on UML, including both the "uses" style and the generalization style presented in Documenting Sofware Architecture
-For each class diagram, an Element catalogue is provided to describe the individual elements.
+For each class diagram, an Element catalogue is provided to describe the individual elements. The element catalogues are composed of several columns describing levels, where the levels describe the nesting level in terms of packages, e.g. if package x is the root package, it will be level 1, whereas a package inside package x would be in level 2. 
 #### **Orchestrator Class Diagram**
 ***Coarse grained view***
 
@@ -416,19 +417,22 @@ The following component and connector (C&C) views visualize the internal structu
 
 #### **Orchestrator CC**
 The following C&C diagram shows the structure of the internal components of the **Orchestrator** at runtime. A single **KafkaMessageHandler** instance is responsible for retrieving messages from kafka and forwarding them to an instance of the **OperationManager**. As there can be multiple order requests, multiple intances of the **StartSequenceOperation** can be created and handled at a time, and thus run in parallel with multiple threads. Each **StartSequenceOperation** interacts with the single instance of the **Coordinator**. The **Coordinator** interacts with one or more **Chef** instances, which are responsible for the production of individual products. The **Chefs** run in parallel with individual threads to enable multiple productions at a time, i.e. produce multiple products at a time. Each **Chef** interacts with the **KafkaClient** that enables interaction with the **Kafka Message Bus** to be able to interact with the different services.
+<div style="text-align:center"><img src="docs/CC_Orchestrator.svg" /></div>
 
-![CC view of orchestrator](docs/CC_Orchestrator.svg)
+<!-- ![CC view of orchestrator](docs/CC_Orchestrator.svg) -->
 
 #### **Configurator CC**
 The following C&C diagram shows the structure of the internal components of the Configurator at runtime. A single **KafkaClient** instance is responsible for retrieving messages from kafka and forwarding them to an instance of the **Configurator**. The Configurator interacts with an intance of the **ConfigurationFinder**, the **ConfigurationAssessor**, the **ConfigurationMapper** and the **ConfigurationInitializer** to handle configuration requests. Both the **ConfigurationFinder** and the **ConfigurationMapper** interact with a **Database** (DB) to retrieve capability-sets and capability-mappings respectively. The **ConfigurationInitializer** interacts with an instance of the **DockerService** to create and destroy containers, i.e. services. In this case study, Docker is used for container management, thus a connector to the **Docker API** is included.
-
-![CC view of configurator](docs/CC_Configurator.svg)
+<div style="text-align:center"><img src="docs/CC_Configurator.svg" /></div>
+<!-- ![CC view of configurator](docs/CC_Configurator.svg) -->
 
 #### **Generic Service CC**
 The following C&C diagram shows the structure of the internal components of the Generic Service at runtime. 
 A single **BusClient** instance is responsible for retrieving messages from Kafka and forwarding them to the **Controller**. If the message is an information request, the **Controller** responds by interacting with the **BusClient**. The **Controller** interacts with a single instance of the **Executionhandler** to enqueue capability-requests. The **ExecutionHandler** interacts with a single instance of the **AssetClient**, e.g. **MQTTAssetClient** to interact with the **Assets** via the **Asset API**. Once the capability-requests is fulfilled, the **ExecutionHandler** interacts with the **BusClient** to send a confirmation to the Message Bus.
 
-![CC view of generic service](docs/CC_GenericService.svg)
+<div style="text-align:center"><img src="docs/CC_GenericService.svg" /></div>
+
+<!-- ![CC view of generic service](docs/CC_GenericService.svg) -->
 
 ### Activitiy Diagrams
 The following diagrams visualize the activities of the individual components, focusing on only on aspects relevant to the reconfiguration process or analysis of the reconfiguration process.
