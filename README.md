@@ -483,22 +483,95 @@ Once either all the steps are succesfully executed or a step failed, the IExecut
 
 # Metrics
 The following chapter describes the metrics measure for both the pilot study and the final experiment. Both are based on the measurements shown in the following diagram. This includes both the Reconfiguration Cycle, the Timeliness and the Process visibility. The Product Traceability is based on log analysis in relation to individual products.
+
 ![Metrics](docs/Metrics.svg)
 ## Pilot Study
 The pilot study is based on ten productions with two products each. For each new production, the steps required for the production change between turning the product clockwise and vice versa.
 ### Pilot Study - Cycle Time
-The cycle time represents the time from starting the production of an order, to sending the first command to an asset.
+The cycle time represents the time from starting the production of an order, to sending the first command to an asset, i.e. the time required to start the necessary services to be able to interact with the required assets.
+we can see the typical cycle time in the pilot study hovers at around 7500 milliseconds.
+
 ![Allocation view](docs/cycletime_measure2.png)
 ### Pilot Study - Timeliness
+The timeliness represents the time from when the necessary services are started, to the time when the first capability has been invoked on an asset. We can see it typically hovers at around one second with two outliers in the beginning.
+
 ![Allocation view](docs/timeliness_measure.png)
 ### Pilot Study - Process Traceability
+The process traceability represents the delay between an event happening and the event being received by a third party entity that is interested in the process. In this case, the third party entity is a logging framework.
+We can see the typical delay is at between zero and one second with a larger delay for the orchestrator.
+
 ![Allocation view](docs/state_measure.png)
 ### Pilot Study - Product Traceability
+The traceability visualizes the status information in relation to the individual products, i.e. when a particular step in the production has started, when it has ended, and if there where any errors.
+The following table only shows the first two orders and the respective products to give an example.
+
+| Order | Product# | Type       | Ops | Start        | End          | Errors |
+|------------------------------|--------------------|---------------|---------------|----------------|--------------|-----------------|
+|1|1|Right_left| T1                           | 27:34.808          | 27:37.230     | 0                                                 |               | T2            | 27:37.230      | 27:43.286    | 0               |
+|                              |                    |               | R             | 27:43.286      | 28:14.601    | 0               |
+|                              |                    |               | T3            | 28:14.601      | 28:15.634    | 0               |
+|                              |                    |               | L             | 28:15.634      | 28:33.018    | 0               |
+|                              |                    |               | T4            | 28:33.019      | 28:35.635    | 0               |
+|                              |                    |               | T5            | 28:35.635      | 28:36.657    | 0               |
+|1|2|Left_right| T1                           | 27:34.826          | 27:36.235     | 0             |
+|                              |                    |               | T2            | 27:36.235      | 27:42.287    | 0               |
+|                              |                    |               | R             | 27:42.290      | 27:58.943    | 0               |
+|                              |                    |               | T3            | 27:58.943      | 28:02.482    | 0               |
+|                              |                    |               | L             | 28:02.482      | 28:17.773    | 0               |
+|                              |                    |               | T4            | 28:17.773      | 28:20.392    | 0               |
+|                              |                    |               | T5            | 28:20.392      | 28:21.414    | 0               |
+|2|1|Right_left| T1                           | 28:43.141          | 28:44.262     | 0             |
+|                              |                    |               | T2            | 28:44.262      | 28:50.320    | 0               |
+|                              |                    |               | L             | 28:50.320      | 29:06.108    | 0               |
+|                              |                    |               | T3            | 29:06.108      | 29:09.686    | 0               |
+|                              |                    |               | R             | 29:09.686      | 29:24.982    | 0               |
+|                              |                    |               | T4            | 29:24.982      | 29:27.597    | 0               |
+|                              |                    |               | T5            | 29:27.597      | 29:28.616    | 0               |
+|2|2|Left_right| T1                           | 28:43.145          | 28:45.251     | 0             |
+|                              |                    |               | T2            | 28:45.252      | 28:51.330    | 0               |
+|                              |                    |               | R             | 28:51.330      | 29:21.784    | 0               |
+|                              |                    |               | T3            | 29:21.784      | 29:22.815    | 0               |
+|                              |                    |               | L             | 29:22.815      | 29:40.181    | 0               |
+|                              |                    |               | T4            | 29:40.181      | 29:42.805    | 0               |
+|                              |                    |               | T5            | 29:42.805      | 29:43.828    | 0               |
+
+
+
+
+
+
 ## Final Experiment
+The final experiment is based on 70 productions with two products each. For each new production, the steps required for the production change between turning the product clockwise and vice versa.
+The descripions for the metrics are the same as for the pilot study
+
 ### Final Experiment - Cycle Time
+For the final experiment, we can see that the trend is similar as with the pilot study at around 7500 milliseconds.
+
 ![Allocation view](docs/cycletime_measure_02.png)
 ### Final Experiment - Timeliness
+For the timeliness, the trend is also similar to the pilot study, with a few outliers in the beginning.
+
 ![Allocation view](docs/timeliness_measure_02.png)
 ### Final Experiment - Process Traceability
+The traceability is also similar to the pilot study.
+
 ![Allocation view](docs/state_measure_02.png)
 ### Final Experiment - Traceability
+The following table shows an example of the traceability, as 140 products would take up a lot of space. Here we show the second product of the first order and the first product of the second order.
+| Order | Product# | Type       | Ops | Start        | End          | Errors |
+|-------|----------|------------|-----|--------------|--------------|--------|
+| 1     | 2        | Right_left | T1  | 20:19:07.734 | 20:19:10.437 | 0      |
+|       |          |            | T2  | 20:19:10.437 | 20:19:16.475 | 0      |
+|       |          |            | R   | 20:19:16.476 | 20:19:47.347 | 0      |
+|       |          |            | T3  | 20:19:47.347 | 20:19:48.378 | 0      |
+|       |          |            | L   | 20:19:48.378 | 20:20:05.712 | 0      |
+|       |          |            | T4  | 20:20:05.712 | 20:20:08.332 | 0      |
+|       |          |            | T5  | 20:20:08.332 | 20:20:09.353 | 0      |
+|       |          |            |     |              |              |        |
+| 2     | 1        | Left_right | T1  | 20:20:15.888 | 20:20:17.313 | 0      |
+|       |          |            | T2  | 20:20:17.313 | 20:20:23.389 | 0      |
+|       |          |            | R   | 20:20:23.389 | 20:20:39.113 | 0      |
+|       |          |            | T3  | 20:20:39.113 | 20:20:42.643 | 0      |
+|       |          |            | L   | 20:20:42.643 | 20:20:57.974 | 0      |
+|       |          |            | T4  | 20:20:57.974 | 20:21:00.585 | 0      |
+|       |          |            | T5  | 20:21:00.585 | 20:21:01.604 | 0      |
