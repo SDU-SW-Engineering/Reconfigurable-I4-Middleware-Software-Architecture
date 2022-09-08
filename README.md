@@ -4,6 +4,7 @@ The primary purpose is to explain the functionality of the system and the Softwa
 1. Brief description of the source code in the /src folder.
 2. Guide on how to build the project using command line tools
 3. Documentation of the code, subdivided into Class Diagrams, Component and Connector Views and Sequence Diagrams.
+4. The Experiment results, including the Pilot Study and the final Experiment
 
 Note that the images a clickable and thus enable zoom in case of unintelligable diagrams due to small size. The individual images can also be found in the /docs folder.
 
@@ -39,6 +40,18 @@ The documentation for the system modules is provided in the /docs folder. The fo
   - Toolchain
     - Enacts a library to reuse code in relation to kafka communication.
 
+The results of the pilot study and the final experiment can be found in the following sections:
+- [Metrics](#metrics)
+  - [Pilot Study](#pilot-study)
+    - [Cycle Time](#pilot-study---cycle-time)
+    - [Timeliness](#pilot-study---timeliness)
+    - [Process Visibility](#pilot-study---Process+\-Traceability)
+    - [Traceability](#pilot-study---product-Traceability)
+  - [Final Experiment](#final-experiment)
+    - [Cycle Time](#final-experiment---cycle-time)
+    - [Timeliness](#final-experiment---timeliness)
+    - [Process Visibility](#final-experiment---Process-Traceability)
+    - [Traceability](#final-experiment---product-Traceability)
 ## Build guide
 The following guide describes the prequisits and process for building and interacting with the project.
 ### Prerequisits
@@ -467,3 +480,25 @@ Initially, the service subscribes a specified topic and supplies the method to b
 On receival of a message from a kafka topic, the supplied method is called, and depending on the nature of the request, two execution paths are available. First, if it is an information request, the Controller responds with the requested information. Secondly, if it is a an execution request, the IController forwards the message to the IExecutionHandler, which is responsible for handling the execution. The IExecutionHandler adds the ExecutionRequest to the queue and handles each ExecutionRequest in the queue sequentially. Each ExecutionRequest includes the ID of a capability to be executed. The capabilityId can be directly mapped to an executionflow. Once the correct executionflow is found, the IExecutionHandler is responsible for handling each step in the executionflow, i.e. finding the right AssetClient and calling the AssetClient to execute the current step. Finding the right client means matching the clientId defined in the step to one of the IAssetClients available.
 Once either all the steps are succesfully executed or a step failed, the IExecutionHandler responds with the status to the original ExecutionRequest on a specified kafka topic using the IBusClient.
 ![Allocation view](docs/Seq_GenericAsset_NormalFlow.svg)
+
+# Metrics
+The following chapter describes the metrics measure for both the pilot study and the final experiment. Both are based on the measurements shown in the following diagram. This includes both the Reconfiguration Cycle, the Timeliness and the Process visibility. The Product Traceability is based on log analysis in relation to individual products.
+![Metrics](docs/Metrics.svg)
+## Pilot Study
+The pilot study is based on ten productions with two products each. For each new production, the steps required for the production change between turning the product clockwise and vice versa.
+### Pilot Study - Cycle Time
+The cycle time represents the time from starting the production of an order, to sending the first command to an asset.
+![Allocation view](docs/cycletime_measure2.png)
+### Pilot Study - Timeliness
+![Allocation view](docs/timeliness_measure.png)
+### Pilot Study - Process Traceability
+![Allocation view](docs/state_measure.png)
+### Pilot Study - Product Traceability
+## Final Experiment
+### Final Experiment - Cycle Time
+![Allocation view](docs/cycletime_measure_02.png)
+### Final Experiment - Timeliness
+![Allocation view](docs/timeliness_measure_02.png)
+### Final Experiment - Process Traceability
+![Allocation view](docs/state_measure_02.png)
+### Final Experiment - Traceability
