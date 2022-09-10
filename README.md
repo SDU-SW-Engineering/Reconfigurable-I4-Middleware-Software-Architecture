@@ -45,13 +45,13 @@ The results of the pilot study and the final experiment can be found in the foll
   - [Pilot Study](#pilot-study)
     - [Cycle Time](#pilot-study---cycle-time)
     - [Timeliness](#pilot-study---timeliness)
-    - [Process Visibility](#pilot-study---Process+\-Traceability)
-    - [Traceability](#pilot-study---product-Traceability)
+    - [Process Traceability](#pilot-study---process-traceability)
+    - [Product Traceability](#pilot-study---product-traceability)
   - [Final Experiment](#final-experiment)
     - [Cycle Time](#final-experiment---cycle-time)
     - [Timeliness](#final-experiment---timeliness)
-    - [Process Visibility](#final-experiment---Process-Traceability)
-    - [Traceability](#final-experiment---product-Traceability)
+    - [Process Traceability](#final-experiment---process-traceability)
+    - [Product Traceability](#final-experiment---product-traceability)
 ## Build guide
 The following guide describes the prequisits and process for building and interacting with the project.
 ### Prerequisits
@@ -556,7 +556,7 @@ For the timeliness, the trend is also similar to the pilot study, with a few out
 The traceability is also similar to the pilot study.
 
 ![Allocation view](docs/state_measure_02.png)
-### Final Experiment - Traceability
+### Final Experiment - Product Traceability
 The following table shows an example of the traceability, as 140 products would take up a lot of space. Here we show the second product of the first order and the first product of the second order.
 | Order | Product# | Type       | Ops | Start        | End          | Errors |
 |-------|----------|------------|-----|--------------|--------------|--------|
