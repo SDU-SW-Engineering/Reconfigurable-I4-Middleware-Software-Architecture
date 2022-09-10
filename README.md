@@ -484,7 +484,7 @@ Once either all the steps are succesfully executed or a step failed, the IExecut
 # Metrics
 The following chapter describes the metrics measure for both the pilot study and the final experiment. Both are based on the measurements shown in the following diagram. This includes both the Reconfiguration Cycle, the Timeliness and the Process visibility. The Product Traceability is based on log analysis in relation to individual products.
 
-![Metrics](docs/Metrics.svg)
+![Metrics](docs/metrics.svg)
 ## Pilot Study
 The pilot study is based on ten productions with two products each. For each new production, the steps required for the production change between turning the product clockwise and vice versa.
 ### Pilot Study - Cycle Time
